@@ -3,10 +3,13 @@ import { CreateQuestionContext } from "../App";
 import { useNavigate } from "react-router-dom";
 import { RiAddFill } from "react-icons/ri";
 import { BsCalendarEvent } from "react-icons/bs";
+import { MdClose } from "react-icons/md";
 
 const CreateQuestion = () => {
   const [questions, setQuestions] = useState([]);
   const { setQuestionAnswers } = useContext(CreateQuestionContext);
+
+  let naviage = useNavigate();
 
   const onAddQuestionClick = (questionType) => {
     const newQuestions = [...questions];
@@ -36,6 +39,14 @@ const CreateQuestion = () => {
     setQuestions(newQuestions);
   };
 
+  const onDeleteChoice = (questionIndex, choiceIndex) => {
+    const updatedQuestions = [...questions];
+    const question = updatedQuestions[questionIndex];
+
+    question.choices.splice(choiceIndex, 1);
+    setQuestions(updatedQuestions);
+  };
+
   const onChoiceChange = (e, questionIndex, choiceIndex) => {
     const newQuestion = { ...questions[questionIndex] };
     const newChoices = [...newQuestion.choices];
@@ -49,7 +60,6 @@ const CreateQuestion = () => {
     setQuestions(newQuestions);
   };
 
-  let naviage = useNavigate();
   const onSubmit = () => {
     setQuestionAnswers(questions);
     naviage("/");
@@ -78,7 +88,7 @@ const CreateQuestion = () => {
                 onClick={() => onAddChoiceClick(questionIndex)}
                 className="bg-gray-500 h-full w-12 flex items-center justify-center rounded-md ml-2"
               >
-                <RiAddFill size={30} color="white" />
+                <RiAddFill className="w-7 h-7" color="white" />
               </button>
             ) : (
               ""
@@ -108,6 +118,13 @@ const CreateQuestion = () => {
                     className="border-b border-slate-300 rounded py-2 pl-2 ml-2 outline-none w-[1220px]"
                     placeholder={`Option ${choiceIndex + 1}`}
                   />
+                  {/* btn delete choice */}
+                  <button
+                    className="flex items-center justify-center w-16 h-10"
+                    onClick={() => onDeleteChoice(questionIndex, choiceIndex)}
+                  >
+                    <MdClose className="w-6 h-6 text-gray-400" />
+                  </button>
                 </div>
               ))}
             </div>
