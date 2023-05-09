@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { CreateQuestionContext } from "../App";
+import { QuestionContext } from "../App";
 
 const AnswerPage = () => {
-  const { questionAnswers } = useContext(CreateQuestionContext);
+  const { questionAnswers } = useContext(QuestionContext);
 
   return (
     <div className="px-4 mt-5 text-slate-600">

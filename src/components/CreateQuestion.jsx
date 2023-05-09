@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { CreateQuestionContext } from "../App";
+import { QuestionContext } from "../App";
 import { useNavigate } from "react-router-dom";
 import { RiAddFill } from "react-icons/ri";
 import { BsCalendarEvent } from "react-icons/bs";
@@ -7,7 +7,7 @@ import { MdClose } from "react-icons/md";
 
 const CreateQuestion = () => {
   const [questions, setQuestions] = useState([]);
-  const { setQuestionAnswers } = useContext(CreateQuestionContext);
+  const { setQuestionAnswers } = useContext(QuestionContext);
 
   let naviage = useNavigate();
 

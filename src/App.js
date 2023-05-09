@@ -5,7 +5,7 @@ import AnswerPage from "./components/AnswerPage";
 import CreateQuestion from "./components/CreateQuestion";
 import Navbar from "./components/Navbar";
 
-export const CreateQuestionContext = createContext();
+export const QuestionContext = createContext();
 
 function App() {
   const defaultState = [
@@ -64,7 +64,7 @@ function App() {
   return (
     <div>
       <Navbar>
-        <CreateQuestionContext.Provider
+        <QuestionContext.Provider
           value={{
             questionAnswers,
             setQuestionAnswers,
@@ -75,7 +75,7 @@ function App() {
             <Route path="/create-question" element={<CreateQuestion />} />
             <Route path="/answer" element={<AnswerPage />} />
           </Routes>
-        </CreateQuestionContext.Provider>
+        </QuestionContext.Provider>
       </Navbar>
     </div>
   );

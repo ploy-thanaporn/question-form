@@ -1,13 +1,11 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { CreateQuestionContext } from "../App";
+import { QuestionContext } from "../App";
 
 const QuestionPage = () => {
   let navigate = useNavigate();
 
-  const { questionAnswers, setQuestionAnswers } = useContext(
-    CreateQuestionContext
-  );
+  const { questionAnswers, setQuestionAnswers } = useContext(QuestionContext);
 
   const renderInput = (question, questionIndex) => {
     if (question.type === "text") {
