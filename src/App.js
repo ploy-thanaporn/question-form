@@ -1,23 +1,82 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from "react-router-dom";
+import { createContext, useState } from "react";
+import QuestionPage from "./components/QuestionPage";
+import AnswerPage from "./components/AnswerPage";
+import CreateQuestion from "./components/CreateQuestion";
+import Navbar from "./components/Navbar";
+
+export const CreateQuestionContext = createContext();
 
 function App() {
+  const defaultState = [
+    {
+      title: "What is your name ",
+      type: "text",
+      choices: [],
+      choicesSelected: [],
+      answer: "",
+    },
+    {
+      title: "What is your birthday ",
+      type: "date",
+      choices: [],
+      choicesSelected: [],
+      answer: "",
+    },
+    {
+      title: "What is the most richest country? ",
+      type: "radio",
+      choices: [
+        {
+          title: "England",
+        },
+        {
+          title: "USA",
+        },
+        {
+          title: "UAE",
+        },
+      ],
+      choicesSelected: [],
+      answer: "",
+    },
+    {
+      title: "Pick your favourite foods? ",
+      type: "checkbox",
+      choices: [
+        {
+          title: "Pizza",
+        },
+        {
+          title: "Hamburger",
+        },
+        {
+          title: "Apple",
+        },
+      ],
+      choicesSelected: [],
+      answer: "",
+    },
+  ];
+
+  const [questionAnswers, setQuestionAnswers] = useState(defaultState);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div>
+      <Navbar>
+        <CreateQuestionContext.Provider
+          value={{
+            questionAnswers,
+            setQuestionAnswers,
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          <Routes>
+            <Route path="/" element={<QuestionPage />} />
+            <Route path="/create-question" element={<CreateQuestion />} />
+            <Route path="/answer" element={<AnswerPage />} />
+          </Routes>
+        </CreateQuestionContext.Provider>
+      </Navbar>
     </div>
   );
 }
