@@ -3,7 +3,7 @@ import { QuestionContext } from "../App";
 import { useNavigate } from "react-router-dom";
 import { RiAddFill } from "react-icons/ri";
 import { BsCalendarEvent } from "react-icons/bs";
-import { MdClose } from "react-icons/md";
+import { MdClose, MdDelete } from "react-icons/md";
 
 const CreateQuestion = () => {
   const [questions, setQuestions] = useState([]);
@@ -22,6 +22,13 @@ const CreateQuestion = () => {
       answer: "",
     });
 
+    setQuestions(newQuestions);
+  };
+
+  const onDeleteQuestion = (questionIndex) => {
+    const newQuestions = [...questions];
+
+    newQuestions.splice(questionIndex, 1);
     setQuestions(newQuestions);
   };
 
@@ -69,9 +76,18 @@ const CreateQuestion = () => {
     return (
       <div className="text-slate-600 px-10 mt-6">
         <div className="flex flex-col">
-          <p className="text-slate-800 font-semibold text-lg mb-3">
-            {questionType.charAt(0).toUpperCase() + questionType.slice(1)}
-          </p>
+          <div className="flex justify-between">
+            <p className="text-slate-800 font-semibold text-lg mb-3">
+              {questionType.charAt(0).toUpperCase() + questionType.slice(1)}
+            </p>
+            <button
+              onClick={() => onDeleteQuestion(questionIndex)}
+              className="h-full w-12 flex items-center justify-center rounded-md ml-2"
+            >
+              <MdDelete className="w-7 h-7" color="red" />
+            </button>
+          </div>
+
           <div className="flex items-center h-10">
             <span>{questionIndex + 1}.</span>
             <input
@@ -115,7 +131,7 @@ const CreateQuestion = () => {
                     }
                     value={choice.title}
                     type="text"
-                    className="border-b border-slate-300 rounded py-2 pl-2 ml-2 outline-none w-[1220px]"
+                    className="border-b border-slate-300 rounded py-2 pl-2 ml-2 outline-none w-[1200px]"
                     placeholder={`Option ${choiceIndex + 1}`}
                   />
                   {/* btn delete choice */}
