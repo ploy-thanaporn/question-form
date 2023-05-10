@@ -97,18 +97,6 @@ const CreateQuestion = () => {
               className="border border-slate-300 rounded block ml-2 h-full px-2.5 w-full"
               placeholder="Question ..."
             />
-
-            {/* btn add choice */}
-            {questionType === "radio" || questionType === "checkbox" ? (
-              <button
-                onClick={() => onAddChoiceClick(questionIndex)}
-                className="bg-gray-500 h-full w-12 flex items-center justify-center rounded-md ml-2"
-              >
-                <RiAddFill className="w-7 h-7" color="white" />
-              </button>
-            ) : (
-              ""
-            )}
           </div>
         </div>
 
@@ -143,6 +131,20 @@ const CreateQuestion = () => {
                   </button>
                 </div>
               ))}
+            </div>
+            {/* btn add choice */}
+            <div className="mt-4 ml-3">
+              {questionType === "radio" || questionType === "checkbox" ? (
+                <button
+                  onClick={() => onAddChoiceClick(questionIndex)}
+                  className="bg-gray-300 py-1.5 px-2 flex items-center justify-center rounded-md ml-2"
+                >
+                  <RiAddFill className="w-6 h-6" color="white" />
+                  <span className="text-white ml-1 pr-1.5">Choice</span>
+                </button>
+              ) : (
+                ""
+              )}
             </div>
           </div>
         ) : questionType === "text" ? (
